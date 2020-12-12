@@ -10,16 +10,20 @@ namespace Arboles_binarios
     {
         private int size;
         private int height;
+        private Node<T> rootNode;
+        private string processOrder;
         public int Size { get => size;  set => size = value; }
         public int Height { get => height;  set => height = value; }
-        public Node<T> RootNode { get => RootNode; private set => RootNode = value; }
-        public string ProcessOrder { get => ProcessOrder; set => ProcessOrder = value; }
+        public Node<T> RootNode { get => rootNode; private set => rootNode = value; }
+        public string ProcessOrder { get => processOrder; set => processOrder = value; }
+
+        private List<T> valores = new List<T>();
 
         public Tree(T data)
         {
             Size = 1;
             Height = 0;
-            Node<T> RootNode = new Node<T>(data);
+            RootNode = new Node<T>(data);
             ProcessOrder = "InOrder";
         }
 
@@ -93,30 +97,32 @@ namespace Arboles_binarios
             return size == 0;
         }
 
-        public string PosOrder(Node<T> nodo, string valores) // Publico temporal
+        public void PosOrder(Node<T> nodo) // Publico temporal
         {
             if (nodo.IsLeaf())
             {
-                return valores += Convert.ToString(nodo.Data) + ", ";
+                valores.Add(nodo.Data);
+                return;
             }
             if(nodo.LeftNode != null)
             {
-                PosOrder(nodo.LeftNode, valores);
+                PosOrder(nodo.LeftNode);
             }
             if(nodo.RightNode != null)
             {
-                PosOrder(nodo.RightNode, valores);
+                PosOrder(nodo.RightNode);
             }
-
-            return valores += Convert.ToString(nodo.Data) + ", ";
+            valores.Add(nodo.Data);
+            return;
         }
 
         public override string ToString()
         {
             if (ProcessOrder == "PostOrder")
             {
-                string valores = string.Empty;
-                return PosOrder( RootNode, valores);
+                valores.Clear();
+                PosOrder(RootNode);
+                return string.Join(",", valores.ToArray());
             }
             else
             {
