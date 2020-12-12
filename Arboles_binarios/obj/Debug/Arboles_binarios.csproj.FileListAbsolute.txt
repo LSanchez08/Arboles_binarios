@@ -1,0 +1,7 @@
+C:\Users\Roger\Desktop\Roger\Universidad\Estructura de datos\3p\Arboles_binarios\Arboles_binarios\bin\Debug\Arboles_binarios.exe.config
+C:\Users\Roger\Desktop\Roger\Universidad\Estructura de datos\3p\Arboles_binarios\Arboles_binarios\bin\Debug\Arboles_binarios.exe
+C:\Users\Roger\Desktop\Roger\Universidad\Estructura de datos\3p\Arboles_binarios\Arboles_binarios\bin\Debug\Arboles_binarios.pdb
+C:\Users\Roger\Desktop\Roger\Universidad\Estructura de datos\3p\Arboles_binarios\Arboles_binarios\obj\Debug\Arboles_binarios.csprojAssemblyReference.cache
+C:\Users\Roger\Desktop\Roger\Universidad\Estructura de datos\3p\Arboles_binarios\Arboles_binarios\obj\Debug\Arboles_binarios.csproj.CoreCompileInputs.cache
+C:\Users\Roger\Desktop\Roger\Universidad\Estructura de datos\3p\Arboles_binarios\Arboles_binarios\obj\Debug\Arboles_binarios.exe
+C:\Users\Roger\Desktop\Roger\Universidad\Estructura de datos\3p\Arboles_binarios\Arboles_binarios\obj\Debug\Arboles_binarios.pdb

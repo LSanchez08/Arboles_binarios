@@ -6,35 +6,42 @@ using System.Threading.Tasks;
 
 namespace Arboles_binarios
 {
-    public class Tree<T> : ITree<T>
+    public class Tree<T>
     {
-        public int size { get => size; private set => size = value; }
-        public int height { get => height; private set => height = value; }
+        private int size;
+        private int height;
+        public int Size { get => size;  set => size = value; }
+        public int Height { get => height;  set => height = value; }
         public Node<T> RootNode { get => RootNode; private set => RootNode = value; }
         public string ProcessOrder { get => ProcessOrder; set => ProcessOrder = value; }
 
-        public Tree(string processOrder, T data)
+        public Tree(T data)
         {
-            this.size = 1;
-            this.height = 0;
+            Size = 1;
+            Height = 0;
             Node<T> RootNode = new Node<T>(data);
-            ProcessOrder = processOrder;
+            ProcessOrder = "InOrder";
         }
 
-        public void AddLeftChild(Node<T> nodo, T data)
+        public Node <T> AddLeftChild(Node<T> nodo, T data)
         {
-            if (nodo.LeftNode != null)
+            if (nodo.LeftNode == null)
             {
                 nodo.LeftNode = new Node<T>(data);
+                return nodo.LeftNode;
             }
+            throw new InvalidOperationException("invalid");
         }
 
-        public void AddRightChild(Node<T> nodo, T data)
+        public Node <T> AddRightChild(Node<T> nodo, T data)
         {
-            if (nodo.RightNode != null)
+            if (nodo.RightNode == null)
             {
                 nodo.RightNode = new Node<T>(data);
+                return nodo.RightNode;
             }
+
+            throw new InvalidOperationException("invalid");
         }
 
         public void AddRoot(T data)
@@ -63,12 +70,58 @@ namespace Arboles_binarios
 
         public void ForEach() // Pendiente
         {
-            throw new NotImplementedException();
+            if (ProcessOrder == "InOrder")
+            {
+
+            }
+            if (ProcessOrder == "PreOrder")
+            {
+
+            }
+            else if (ProcessOrder == "PostOrder")
+            {
+              
+            }
+            else
+            {
+                throw new InvalidOperationException("invalid");
+            }
         }
 
         public bool isEmpty()
         {
             return size == 0;
+        }
+
+        public string PosOrder(Node<T> nodo, string valores) // Publico temporal
+        {
+            if (nodo.IsLeaf())
+            {
+                return valores += Convert.ToString(nodo.Data) + ", ";
+            }
+            if(nodo.LeftNode != null)
+            {
+                PosOrder(nodo.LeftNode, valores);
+            }
+            if(nodo.RightNode != null)
+            {
+                PosOrder(nodo.RightNode, valores);
+            }
+
+            return valores += Convert.ToString(nodo.Data) + ", ";
+        }
+
+        public override string ToString()
+        {
+            if (ProcessOrder == "PostOrder")
+            {
+                string valores = string.Empty;
+                return PosOrder( RootNode, valores);
+            }
+            else
+            {
+                throw new InvalidOperationException("invalid");
+            }
         }
     }
 }
