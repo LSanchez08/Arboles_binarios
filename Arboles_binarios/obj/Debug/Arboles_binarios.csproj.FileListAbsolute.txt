@@ -12,3 +12,10 @@ C:\Users\IGNITER\source\repos\Arboles_binarios\Arboles_binarios\obj\Debug\Arbole
 C:\Users\IGNITER\source\repos\Arboles_binarios\Arboles_binarios\bin\Debug\Arboles_binarios.exe.config
 C:\Users\IGNITER\source\repos\Arboles_binarios\Arboles_binarios\bin\Debug\Arboles_binarios.exe
 C:\Users\IGNITER\source\repos\Arboles_binarios\Arboles_binarios\bin\Debug\Arboles_binarios.pdb
+D:\mendo\Documents\Sergio Mendoza\Proyectos\ArbolBinario\Arboles_binarios\Arboles_binarios\bin\Debug\Arboles_binarios.exe.config
+D:\mendo\Documents\Sergio Mendoza\Proyectos\ArbolBinario\Arboles_binarios\Arboles_binarios\bin\Debug\Arboles_binarios.exe
+D:\mendo\Documents\Sergio Mendoza\Proyectos\ArbolBinario\Arboles_binarios\Arboles_binarios\bin\Debug\Arboles_binarios.pdb
+D:\mendo\Documents\Sergio Mendoza\Proyectos\ArbolBinario\Arboles_binarios\Arboles_binarios\obj\Debug\Arboles_binarios.csprojAssemblyReference.cache
+D:\mendo\Documents\Sergio Mendoza\Proyectos\ArbolBinario\Arboles_binarios\Arboles_binarios\obj\Debug\Arboles_binarios.csproj.CoreCompileInputs.cache
+D:\mendo\Documents\Sergio Mendoza\Proyectos\ArbolBinario\Arboles_binarios\Arboles_binarios\obj\Debug\Arboles_binarios.exe
+D:\mendo\Documents\Sergio Mendoza\Proyectos\ArbolBinario\Arboles_binarios\Arboles_binarios\obj\Debug\Arboles_binarios.pdb

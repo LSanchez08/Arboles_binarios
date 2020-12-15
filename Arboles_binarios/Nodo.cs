@@ -14,6 +14,8 @@ namespace Arboles_binarios
         public Node<T> LeftNode { get; set; }
         public int Height { get; }
 
+        public Tree<T> tree { get; private set; }
+
         public bool IsLeaf()
         {
             if (LeftNode == null && RightNode == null)
@@ -22,14 +24,8 @@ namespace Arboles_binarios
             }
             return false;
         }
-        public bool HasChildren()
-        {
-            if (LeftNode == null || RightNode == null)
-            {
-                return true;
-            }
-            return false;
-        }
+        public bool HasChildren() => !IsLeaf();
+        
         Node <T> GetSibling()
         {
             Node <T> left = ParentNode.LeftNode;
@@ -43,13 +39,21 @@ namespace Arboles_binarios
                 return left;
             }
         }
-
-        public Node(T data)
+        public Node(T data, Node<T> parent, Tree<T> arbol)
         {
             Data = data;
-            ParentNode = null;
+            ParentNode = parent;
             RightNode = null;
             LeftNode = null;
+            tree = arbol;
+            if(parent != null)
+            {
+                Height = ParentNode.Height + 1;
+            }
+            else
+            {
+                Height = 0;
+            }
         }
     }
 }
