@@ -31,7 +31,7 @@ namespace Arboles_binarios
             // Pino.ProcessOrder = "InOrder";
             string tree = Pino.ToString();
             Console.WriteLine(tree);
-
+            
             List<int> dataModified;
             int sum = 0;
             Pino.ForEach(value => sum += value);
