@@ -31,7 +31,6 @@ namespace Arboles_binarios
             // Node<int> n13 = Pino.AddRightChild(n8, 23);
 
 
-
             // No permite agregar root a un arbol ya existente
             //Pino.AddRoot(5);
             Tree<int> Roble = new Tree<int>();
@@ -52,6 +51,7 @@ namespace Arboles_binarios
             string tree_postOrder = Pino.ToString();
             Console.WriteLine($"PostOrder: {tree_postOrder}\n");
 
+            Console.WriteLine("Pino Height: " + Pino.Height);
             Console.WriteLine("\n --------------------------------------- \n");
 
             //Metodo ForEach
@@ -71,11 +71,13 @@ namespace Arboles_binarios
             Pino.DeleteNode(n5, false);
             Console.WriteLine("5 Deleted:" + Pino.ToString());
             Console.WriteLine("Size:" + Pino.Size);
+            Console.WriteLine("Tree Height: " + Pino.Height);
             Console.WriteLine("\n");
             // Delete root o parent node
             Pino.DeleteNode(Pino.RootNode, true);
             Console.WriteLine("Root Deleted:" + Pino.ToString());
             Console.WriteLine("Size:" + Pino.Size);
+            Console.WriteLine("Tree Height: " + Pino.Height);
 
             //Tree Sort
             Console.WriteLine("\n --------------------------------------- \n");

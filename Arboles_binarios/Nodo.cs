@@ -28,6 +28,10 @@ namespace Arboles_binarios
         
         Node <T> GetSibling()
         {
+            if(ParentNode == null )
+            {
+                throw new InvalidOperationException("This node has no parent");
+            }
             Node <T> left = ParentNode.LeftNode;
             Node <T> right = ParentNode.RightNode;
             if (left == this)

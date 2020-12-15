@@ -15,7 +15,7 @@ namespace Arboles_binarios
 
 
         public int Size { get => getSize(); }
-        public int Height { get => height; set => height = value; }
+        public int? Height { get => getHeight();}
         public Node<T> RootNode { get => rootNode; private set => rootNode = value; }
         
 
@@ -27,13 +27,11 @@ namespace Arboles_binarios
         public Tree()
         {
             size = 0;
-            Height = 0;
             RootNode = null;
         }
         public Tree(T data)
         {
             size = 1;
-            Height = 0;
             RootNode = new Node<T>(data, null, this);
         }
 
@@ -77,9 +75,35 @@ namespace Arboles_binarios
 
             throw new InvalidOperationException("invalid");
         }
-        public int getHeight()
+        public int? getHeight()
         {
-            return 0;
+            if (isEmpty())
+            {
+
+                return null;
+            }
+            int maxH = RootNode.Height;
+
+            maxH = MaxHeight(RootNode, maxH);
+
+            return maxH;
+        }
+
+        private int MaxHeight(Node<T> nodo, int maxh)
+        {
+            if (nodo.LeftNode != null)
+            {
+                maxh = MaxHeight(nodo.LeftNode, maxh);
+            }
+            if (nodo.RightNode != null)
+            {
+                maxh = MaxHeight(nodo.RightNode, maxh);
+            }
+            if (nodo.Height>maxh)
+            {
+                maxh = nodo.Height;
+            }
+            return maxh;
         }
         public int getSize()
         {
@@ -218,10 +242,10 @@ namespace Arboles_binarios
 
         public bool isEmpty()
         {
-            return size == 0;
+            return Size == 0;
         }
 
-        public void PosTOrder(Node<T> nodo, Action<T> accion = null) // Publico temporal
+        private void PosTOrder(Node<T> nodo, Action<T> accion = null) // Publico temporal
         {
             if (nodo == null)
             {
@@ -243,7 +267,7 @@ namespace Arboles_binarios
             return;
         }
 
-        public void PreOrder(Node<T> nodo, Action<T> accion = null) // Publico temporal
+        private void PreOrder(Node<T> nodo, Action<T> accion = null) // Publico temporal
         {
             if (nodo == null)
             {
@@ -265,7 +289,7 @@ namespace Arboles_binarios
             return;
         }
 
-        public void InOrder(Node<T> nodo, Action<T> accion = null) // Publico temporal
+        private void InOrder(Node<T> nodo, Action<T> accion = null) // Publico temporal
         {
             if(nodo == null)
             {
