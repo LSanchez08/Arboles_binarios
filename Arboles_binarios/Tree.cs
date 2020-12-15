@@ -11,11 +11,15 @@ namespace Arboles_binarios
         private int size;
         private int height;
         private Node<T> rootNode;
-        private string processOrder;
+        // private string processOrder;
         public int Size { get => size;  set => size = value; }
         public int Height { get => height;  set => height = value; }
         public Node<T> RootNode { get => rootNode; private set => rootNode = value; }
-        public string ProcessOrder { get => processOrder; set => processOrder = value; }
+        
+        private string processOrder;
+        public enum ProcessOrder { InOrder = 1, PreOrder = 2, PostOrder = 3 };
+        
+        // public string ProcessOrder { get => processOrder; set => processOrder = value; }
 
         private List<T> valores = new List<T>();
 
@@ -24,7 +28,7 @@ namespace Arboles_binarios
             Size = 1;
             Height = 0;
             RootNode = new Node<T>(data);
-            ProcessOrder = "InOrder";
+            processOrder = "InOrder";
         }
 
         public Node <T> AddLeftChild(Node<T> nodo, T data)
@@ -74,15 +78,15 @@ namespace Arboles_binarios
 
         public void ForEach() // Pendiente
         {
-            if (ProcessOrder == "InOrder")
+            if (processOrder == "InOrder")
             {
 
             }
-            if (ProcessOrder == "PreOrder")
+            if (processOrder == "PreOrder")
             {
 
             }
-            else if (ProcessOrder == "PostOrder")
+            else if (processOrder == "PostOrder")
             {
               
             }
@@ -116,18 +120,63 @@ namespace Arboles_binarios
             return;
         }
 
+        public void PreOrder(Node<T> nodo) // Publico temporal
+        {
+            valores.Add(nodo.Data);
+            if (nodo.LeftNode != null)
+            {
+                PreOrder(nodo.LeftNode);
+            }
+            if (nodo.RightNode != null)
+            {
+                PreOrder(nodo.RightNode);
+            }
+            return;
+        }
+
+        public void InOrder(Node<T> nodo) // Publico temporal
+        {
+            if (nodo.LeftNode != null)
+            {
+                InOrder(nodo.LeftNode);
+            }
+            valores.Add(nodo.Data);
+            if (nodo.RightNode != null)
+            {
+                InOrder(nodo.RightNode);
+            }
+            return;
+        }
+
         public override string ToString()
         {
-            if (ProcessOrder == "PostOrder")
+            if (processOrder == "PostOrder")
             {
                 valores.Clear();
                 PosOrder(RootNode);
+                return string.Join(",", valores.ToArray());
+            }
+            if (processOrder == "PreOrder")
+            {
+                valores.Clear();
+                PreOrder(RootNode);
+                return string.Join(",", valores.ToArray());
+            }
+            if (processOrder == "InOrder")
+            {
+                valores.Clear();
+                InOrder(RootNode);
                 return string.Join(",", valores.ToArray());
             }
             else
             {
                 throw new InvalidOperationException("invalid");
             }
+        }
+
+        public void ForEach(Action<T> accion)
+        {
+            throw new InvalidOperationException("invalid");
         }
     }
 }

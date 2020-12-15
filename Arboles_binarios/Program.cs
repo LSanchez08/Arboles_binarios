@@ -25,7 +25,7 @@ namespace Arboles_binarios
             Node<int> n10 = Pino.AddRightChild(n8, 10); // 10 Hijo de 8
             Node<int> n11 = Pino.AddRightChild(n9, 11); // 11 Hijo de 9
 
-            Pino.ProcessOrder = "PostOrder";
+            Pino.ProcessOrder = "InOrder";
             string tree = Pino.ToString();
 
             Console.WriteLine(tree);
