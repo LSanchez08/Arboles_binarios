@@ -11,14 +11,16 @@ namespace Arboles_binarios
         private int size;
         private int height;
         private Node<T> rootNode;
-        
-        public int Size { get => size;  set => size = value; }
-        public int Height { get => height;  set => height = value; }
+
+
+        public int Size { get => size; set => size = value; }
+        public int Height { get => height; set => height = value; }
         public Node<T> RootNode { get => rootNode; private set => rootNode = value; }
 
-        
+
         public enum ProcessOrder { InOrder, PreOrder, PostOrder }
         ProcessOrder ProcessElegido = ProcessOrder.InOrder;
+
 
 
         private List<T> valores = new List<T>();
@@ -30,7 +32,7 @@ namespace Arboles_binarios
             RootNode = new Node<T>(data);
         }
 
-        public Node <T> AddLeftChild(Node<T> nodo, T data)
+        public Node<T> AddLeftChild(Node<T> nodo, T data)
         {
             if (nodo.LeftNode == null)
             {
@@ -40,7 +42,7 @@ namespace Arboles_binarios
             throw new InvalidOperationException("invalid");
         }
 
-        public Node <T> AddRightChild(Node<T> nodo, T data)
+        public Node<T> AddRightChild(Node<T> nodo, T data)
         {
             if (nodo.RightNode == null)
             {
@@ -63,7 +65,7 @@ namespace Arboles_binarios
         {
             if (nodo.IsLeaf())
             {
-                Node <T> padre = nodo.ParentNode;
+                Node<T> padre = nodo.ParentNode;
                 if (padre.LeftNode == nodo)
                 {
                     padre.LeftNode = null;
@@ -75,27 +77,65 @@ namespace Arboles_binarios
             }
         }
 
-        public void ForEach() // Pendiente
+        /*public void ForEach() // Pendiente
         {
-            if (ProcessOrder == "InOrder")
+            if (processOrder == "InOrder")
             {
 
             }
-            if (ProcessOrder == "PreOrder")
+            if (processOrder == "PreOrder")
             {
 
             }
-            else if (ProcessOrder == "PostOrder")
+            else if (processOrder == "PostOrder")
             {
-              
+
             }
             else
             {
                 throw new InvalidOperationException("invalid");
             }
         }
+        */
+        private void SetNode(Node <T> currentNode, T data)
+        {
+            if(Convert.ToInt32(currentNode.Data) > Convert.ToInt32(data))
+            {
+                if (currentNode.LeftNode == null)
+                {
+                    currentNode.LeftNode = new Node<T>(data);
+                }
+                else
+                {
+                    SetNode(currentNode.LeftNode, data);
+                }
+            }
+            else
+            {
+                if (currentNode.RightNode == null)
+                {
+                    currentNode.RightNode = new Node<T>(data);
+                }
+                else
+                {
+                    SetNode(currentNode.RightNode, data);
+                }
+            }
+        }
 
-        public void TreeSort() {
+        public string TreeSort(T[] array)
+        {
+            // T[] arbol;
+            // [6,                              |3,2,4,9,8,5,6]
+            for (int i = 1; i < array.Length; i++)
+            {
+                SetNode(RootNode, array[i]);
+            }
+
+            valores.Clear();
+            InOrder(RootNode);
+            return string.Join(",", valores.ToArray());
+        }
 
         public bool isEmpty()
         {
@@ -121,12 +161,52 @@ namespace Arboles_binarios
             return;
         }
 
-        public override string ToString()
+        public void PreOrder(Node<T> nodo) // Publico temporal
         {
-            if (ProcessOrder == "PostOrder")
+            valores.Add(nodo.Data);
+            if (nodo.LeftNode != null)
+            {
+                PreOrder(nodo.LeftNode);
+            }
+            if (nodo.RightNode != null)
+            {
+                PreOrder(nodo.RightNode);
+            }
+            return;
+        }
+
+        public void InOrder(Node<T> nodo) // Publico temporal
+        {
+            if (nodo.LeftNode != null)
+            {
+                InOrder(nodo.LeftNode);
+            }
+            valores.Add(nodo.Data);
+            if (nodo.RightNode != null)
+            {
+                InOrder(nodo.RightNode);
+            }
+            return;
+        }
+
+        /*public override string ToString()
+        {
+            if (processOrder == "PostOrder")
             {
                 valores.Clear();
                 PosOrder(RootNode);
+                return string.Join(",", valores.ToArray());
+            }
+            if (processOrder == "PreOrder")
+            {
+                valores.Clear();
+                PreOrder(RootNode);
+                return string.Join(",", valores.ToArray());
+            }
+            if (processOrder == "InOrder")
+            {
+                valores.Clear();
+                InOrder(RootNode);
                 return string.Join(",", valores.ToArray());
             }
             else
@@ -134,40 +214,13 @@ namespace Arboles_binarios
                 throw new InvalidOperationException("invalid");
             }
         }
+        */
 
-        // Si se rompe borra desde aqui
-        // private class Enumerator : IEnumerator
-        // {
-        //     private Node<T> currentNode;
-        //     private Tree<T> list;
-        // 
-        // 
-        // 
-        //     public Enumerator(Tree<T> list)
-        //     {
-        //         this.list = list;
-        //         currentNode = null;
-        //     }
-        // 
-        //     public object Current => currentNode.Data;
-        // 
-        //     public bool MoveNext()
-        //     {
-        //         if (currentNode.IsLeaf())
-        //         {
-        //             return false;
-        //         }
-        // 
-        //         currentNode = currentNode;
-        //         return true;
-        //     }
-        // 
-        //     public void Reset() => currentNode = -1;
-        // }
-        // 
-        // public IEnumerator GetEnumerator()
-        // {
-        //     return new Enumerator(this);
-        // }
+
+        public void ForEach(Action<T> accion)
+        {
+            throw new InvalidOperationException("invalid");
+        }
+
     }
 }

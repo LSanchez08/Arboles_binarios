@@ -10,6 +10,7 @@ namespace Arboles_binarios
     {
         static void Main(string[] args)
         {
+            
             Tree<int> Pino = new Tree<int>(0); // Nucleo
             // Primer mitad izquierda
             Node<int> n1 = Pino.AddLeftChild(Pino.RootNode,1); // 1 Hijo de 0
@@ -24,11 +25,20 @@ namespace Arboles_binarios
             Node<int> n9 = Pino.AddLeftChild(n8, 9); // 9 Hijo de 8
             Node<int> n10 = Pino.AddRightChild(n8, 10); // 10 Hijo de 8
             Node<int> n11 = Pino.AddRightChild(n9, 11); // 11 Hijo de 9
+            
+            // Pino.ProcessOrder = "InOrder";
+            // string tree = Pino.ToString();
+            // Console.WriteLine(tree);
 
-            Pino.ProcessOrder = "PostOrder";
-            string tree = Pino.ToString();
+            //Tree Sort
 
-            Console.WriteLine(tree);
+            int[] List = {25, 148, 26, -3, 89};
+            Tree<int> Acacia = new Tree<int>(List[0]);
+
+            string ordenado = Acacia.TreeSort(List);
+            Console.WriteLine(ordenado);
+
+
             Console.ReadKey();
         }
     }
