@@ -193,7 +193,7 @@ namespace Arboles_binarios
 
         private void SetNode(Node <T> currentNode, T data)
         {
-            if(Convert.ToInt32(currentNode.Data) > Convert.ToInt32(data))
+            if(Comparer<T>.Default.Compare(currentNode.Data, data) == 1)
             {
                 if (currentNode.LeftNode == null)
                 {
@@ -228,16 +228,14 @@ namespace Arboles_binarios
                 {
                     SetNode(RootNode, array[i]);
                 }
-
                 valores.Clear();
                 InOrder(RootNode);
                 return string.Join(",", valores.ToArray());
             }
             else
             {
-                throw new InvalidOperationException("Tree has data already.");
+                throw new InvalidOperationException("Tree has data already.");  
             }
-
         }
 
         public bool isEmpty()
