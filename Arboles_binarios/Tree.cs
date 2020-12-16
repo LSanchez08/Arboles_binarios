@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Arboles_binarios
 {
-    public class Tree<T> : IEnumerable
+    public class Tree<T> : ITree<T>, IEnumerable
     {
         private int size;
         private int height;
         private Node<T> rootNode;
 
-
+        // 1
         public int Size { get => getSize(); }
         public int? Height { get => getHeight();}
         public Node<T> RootNode { get => rootNode; private set => rootNode = value; }
@@ -47,6 +47,48 @@ namespace Arboles_binarios
             }
             return true;
         }
+        public bool isEmpty()
+        {
+            return Size == 0;
+        }
+        public int? getHeight()
+        {
+            if (isEmpty())
+            {
+                return null;
+            }
+            int maxH = RootNode.Height;
+
+            maxH = MaxHeight(RootNode, maxH);
+
+            return maxH;
+        }
+        private int MaxHeight(Node<T> nodo, int maxh)
+        {
+            if (nodo.LeftNode != null)
+            {
+                maxh = MaxHeight(nodo.LeftNode, maxh);
+            }
+            if (nodo.RightNode != null)
+            {
+                maxh = MaxHeight(nodo.RightNode, maxh);
+            }
+            if (nodo.Height > maxh)
+            {
+                maxh = nodo.Height;
+            }
+            return maxh;
+        }
+        public int getSize()
+        {
+            valores.Clear();
+            PosTOrder(rootNode);
+            return valores.Count();
+        }
+
+        //1
+
+        //2
         public Node<T> AddLeftChild(Node<T> nodo, T data)
         {
             if (nodo.tree != this)
@@ -75,42 +117,7 @@ namespace Arboles_binarios
 
             throw new InvalidOperationException("invalid");
         }
-        public int? getHeight()
-        {
-            if (isEmpty())
-            {
-
-                return null;
-            }
-            int maxH = RootNode.Height;
-
-            maxH = MaxHeight(RootNode, maxH);
-
-            return maxH;
-        }
-
-        private int MaxHeight(Node<T> nodo, int maxh)
-        {
-            if (nodo.LeftNode != null)
-            {
-                maxh = MaxHeight(nodo.LeftNode, maxh);
-            }
-            if (nodo.RightNode != null)
-            {
-                maxh = MaxHeight(nodo.RightNode, maxh);
-            }
-            if (nodo.Height>maxh)
-            {
-                maxh = nodo.Height;
-            }
-            return maxh;
-        }
-        public int getSize()
-        {
-            valores.Clear();
-            PosTOrder(rootNode);
-            return valores.Count();
-        }
+        
         public void AddRoot(T data)
         {
             if (RootNode == null)
@@ -173,24 +180,8 @@ namespace Arboles_binarios
                 }
             }
         }
-
-        public string setProcessOrder(int num)
-        {
-            switch (num)
-            {
-                case 1:
-                    ProcessElegido = ProcessOrder.InOrder;
-                    return "ProcessOrder set to InOrder";
-                case 2:
-                    ProcessElegido = ProcessOrder.PreOrder;
-                    return "ProcessOrder set to PreOrder";
-                case 3:
-                    ProcessElegido = ProcessOrder.PostOrder;
-                    return "ProcessOrder set to PostOrder";
-            }
-            throw new InvalidOperationException("Invalid Argument: 1 -> InOrder, 2 -> PreOrder, 3 -> PostOrder");
-        }
-
+            
+        //3
         private void SetNode(Node <T> currentNode, T data)
         {
             if(Comparer<T>.Default.Compare(currentNode.Data, data) == 1)
@@ -237,12 +228,25 @@ namespace Arboles_binarios
                 throw new InvalidOperationException("Tree has data already.");  
             }
         }
+        //3
 
-        public bool isEmpty()
+        //4
+        public string setProcessOrder(int num)
         {
-            return Size == 0;
+            switch (num)
+            {
+                case 1:
+                    ProcessElegido = ProcessOrder.InOrder;
+                    return "ProcessOrder set to InOrder";
+                case 2:
+                    ProcessElegido = ProcessOrder.PreOrder;
+                    return "ProcessOrder set to PreOrder";
+                case 3:
+                    ProcessElegido = ProcessOrder.PostOrder;
+                    return "ProcessOrder set to PostOrder";
+            }
+            throw new InvalidOperationException("Invalid Argument: 1 -> InOrder, 2 -> PreOrder, 3 -> PostOrder");
         }
-
         private void PosTOrder(Node<T> nodo, Action<T> accion = null) // Publico temporal
         {
             if (nodo == null)
@@ -308,23 +312,9 @@ namespace Arboles_binarios
             }
             return;
         }
+        //4
 
-        public void ForEach(Action<T> accion)
-        {
-            if (ProcessElegido == ProcessOrder.PostOrder)
-            {
-                PosTOrder(RootNode, accion);   
-            }
-            if (ProcessElegido == ProcessOrder.PreOrder)
-            {
-                PreOrder(RootNode, accion);
-            }
-            if (ProcessElegido == ProcessOrder.InOrder)
-            {
-                InOrder(RootNode, accion);
-            }
-        }
-
+        //5
         public override string ToString()
         {
             if (ProcessElegido == ProcessOrder.PostOrder)
@@ -348,6 +338,22 @@ namespace Arboles_binarios
             else
             {
                 throw new InvalidOperationException("invalid");
+            }
+        }
+
+        public void ForEach(Action<T> accion)
+        {
+            if (ProcessElegido == ProcessOrder.PostOrder)
+            {
+                PosTOrder(RootNode, accion);   
+            }
+            if (ProcessElegido == ProcessOrder.PreOrder)
+            {
+                PreOrder(RootNode, accion);
+            }
+            if (ProcessElegido == ProcessOrder.InOrder)
+            {
+                InOrder(RootNode, accion);
             }
         }
 
@@ -380,5 +386,7 @@ namespace Arboles_binarios
         {
             return new Enumerator(this);
         }
+
+        //
     }
 }

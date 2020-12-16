@@ -26,10 +26,10 @@ namespace Arboles_binarios
             Node<int> n10 = Pino.AddRightChild(n8, 10); // 10 Hijo de 8
             Node<int> n11 = Pino.AddRightChild(n9, 11); // 11 Hijo de 9
 
-            // No permite agregar hijos en caso de que ya existan
-            // Node<int> n12 = Pino.AddLeftChild(n1, 50);
-            // Node<int> n13 = Pino.AddRightChild(n8, 23);
-
+            //No permite agregar hijos en caso de que ya existan
+            //Node<int> n12 = Pino.AddLeftChild(n1, 50);
+            //Node<int> n13 = Pino.AddRightChild(n8, 23);
+            
 
             // No permite agregar root a un arbol ya existente
             //Pino.AddRoot(5);
